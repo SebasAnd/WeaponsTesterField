@@ -14,6 +14,8 @@ public class CharacterControl : MonoBehaviour
     public float sensitivity = 2;
     public float smoothing = 1.5f;
 
+    public GameObject CurrentWeapon;
+
 
     //Stats*************///
 
@@ -29,6 +31,10 @@ public class CharacterControl : MonoBehaviour
     Vector2 velocity;
     Vector2 frameVelocity;
 
+    public GameObject selector;
+
+    public GameObject WeaponLocation;
+
 
 
     public bool CanMove;
@@ -37,8 +43,15 @@ public class CharacterControl : MonoBehaviour
      {
          idle,
          walking,
+         bWalk,
 
-         bWalk,    
+         gunIdle,
+         gunWalk,
+         gunBWalk,
+
+         wizzardIdle,
+         wizzardWalk,
+         wizzardBWalk,    
      }
      
      public CharacterState _state;
@@ -53,6 +66,21 @@ public class CharacterControl : MonoBehaviour
         sensitivityHorizontal = 100.0f;
         sensitivityVertical = 100.0f;
         speedWalk = 10.0f;
+    }
+
+    public void changeState(string state){
+        switch(state)
+         {
+            case "Rifle":
+                this._state = CharacterState.gunIdle;            
+                this.animator.Play("Base Layer.gunIdle");
+                break;
+            case "None":
+                this._state = CharacterState.idle;            
+                this.animator.Play("Base Layer.Idle");
+                break;
+         }
+        
     }
     public void ChangePosition(){
         this.transform.position = Fase2Location.transform.position;
@@ -87,17 +115,44 @@ public class CharacterControl : MonoBehaviour
 
     void CheckKey()
      {
-         if(Input.GetKeyDown(KeyCode.W) ) {
+         if(Input.GetKeyDown(KeyCode.W) && CurrentWeapon == null ) {
              _state = CharacterState.walking;
-         } else if (Input.GetKeyUp(KeyCode.W)) {
+         } else if (Input.GetKeyUp(KeyCode.W) && CurrentWeapon == null) {
              _state = CharacterState.idle;
          }else{
-             if(Input.GetKeyDown(KeyCode.S) ) {
+             if(Input.GetKeyDown(KeyCode.S) && CurrentWeapon == null ) {
              _state = CharacterState.bWalk;
-         } else if ( Input.GetKeyUp(KeyCode.S) ) {
+         } else if ( Input.GetKeyUp(KeyCode.S) && CurrentWeapon == null ) {
              _state = CharacterState.idle;
          }
          }
+
+         if(Input.GetKeyDown(KeyCode.W) && CurrentWeapon != null && CurrentWeapon.tag =="Rifle") {
+             _state = CharacterState.gunWalk;
+         } else if (Input.GetKeyUp(KeyCode.W) && CurrentWeapon != null && CurrentWeapon.tag =="Rifle") {
+             _state = CharacterState.gunIdle;
+         }else{
+             if(Input.GetKeyDown(KeyCode.S) && CurrentWeapon != null && CurrentWeapon.tag =="Rifle") {
+             _state = CharacterState.gunBWalk;
+         } else if ( Input.GetKeyUp(KeyCode.S) && CurrentWeapon != null && CurrentWeapon.tag =="Rifle") {
+             _state = CharacterState.gunIdle;
+         }
+         }
+
+         if(Input.GetKeyDown(KeyCode.W) && CurrentWeapon != null && CurrentWeapon.tag =="Rings") {
+             _state = CharacterState.wizzardWalk;
+         } else if (Input.GetKeyUp(KeyCode.W) && CurrentWeapon != null && CurrentWeapon.tag =="Rings") {
+             _state = CharacterState.wizzardIdle;
+         }else{
+             if(Input.GetKeyDown(KeyCode.S) && CurrentWeapon != null && CurrentWeapon.tag =="Rings") {
+             _state = CharacterState.wizzardBWalk;
+         } else if ( Input.GetKeyUp(KeyCode.S) && CurrentWeapon != null && CurrentWeapon.tag =="Rings") {
+             _state = CharacterState.wizzardIdle;
+         }
+         }
+
+         
+        
          PlayAnimation();
      }
 
@@ -117,13 +172,36 @@ public class CharacterControl : MonoBehaviour
          
             case CharacterState.walking:
                     this.animator.Play("Base Layer.Walk");
+                    break;  
+
+            case CharacterState.gunIdle:
+                    this.animator.Play("Base Layer.gunIdle");
+                    break;  
+
+            case CharacterState.gunWalk:
+                    this.animator.Play("Base Layer.gunWalk");
+                    break; 
+            case CharacterState.gunBWalk:
+                    this.animator.Play("Base Layer.gunBWalk");
                     break;    
+            case CharacterState.wizzardIdle:
+                    this.animator.Play("Base Layer.wizzardIdle");
+                    break;  
+
+            case CharacterState.wizzardWalk:
+                    this.animator.Play("Base Layer.wizzardWalk");
+                    break; 
+            case CharacterState.wizzardBWalk:
+                    this.animator.Play("Base Layer.wizzardBWalk");
+                    break;  
          }            
      }
 
     // Update is called once per frame
     void Update()
     {
+
+        
         
         if(CanMove){
 
@@ -137,6 +215,7 @@ public class CharacterControl : MonoBehaviour
             // Rotate camera up-down and controller left-right from velocity.
             this.Fase2UI.transform.localRotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
             this.transform.rotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
+
 
 
             if(Input.GetKey(KeyCode.W)){
