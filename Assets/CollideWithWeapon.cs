@@ -10,6 +10,9 @@ public class CollideWithWeapon : MonoBehaviour
     GameObject currentWeapon;
 
     public GameObject RifleGoodLocation;
+    public GameObject ParabolicRifle;
+
+    public bool haveWeapon;
 
 
     bool canPickup;
@@ -17,21 +20,30 @@ public class CollideWithWeapon : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        haveWeapon = false;
         
     }
 
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Rifle" ){
+        if(other.tag == "Rifle" && haveWeapon == false){
+
             canPickup = true; 
             currentWeapon = other.gameObject;
+            
+            other.GetComponent<PRifleBehaviour>().collideIndicator.gameObject.SetActive(true);
 
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        canPickup = false; //when you leave the collider set the canpickup bool to false
+        canPickup = false;
+
+        if(other.tag == "Rifle" ){
+            other.GetComponent<PRifleBehaviour>().collideIndicator.gameObject.SetActive(false);
+
+        }        
      
     }
 
@@ -40,7 +52,7 @@ public class CollideWithWeapon : MonoBehaviour
         if(canPickup == true) // if you enter thecollider of the objecct
         {
 
-            if(Input.GetKey(KeyCode.E)){
+            if(Input.GetKey(KeyCode.E) && player.GetComponent<CharacterControl>().CurrentWeapon == null && haveWeapon == false){
                 //currentWeapon.transform.rotation = Quaternion.identity;
                 //currentWeapon.transform.localPosition = player.GetComponent<CharacterControl>().WeaponLocation.transform.localPosition;
                 //currentWeapon.transform.localRotation = player.GetComponent<CharacterControl>().WeaponLocation.transform.localRotation;
@@ -49,24 +61,45 @@ public class CollideWithWeapon : MonoBehaviour
                 currentWeapon.GetComponent<Rigidbody>().isKinematic = true;   //makes the rigidbody not be acted upon by forces
                 currentWeapon.transform.position = player.GetComponent<CharacterControl>().WeaponLocation.transform.position; // sets the position of the object to your hand position
                 currentWeapon.transform.parent = player.GetComponent<CharacterControl>().WeaponLocation.transform;
-                currentWeapon.SetActive(false);
-                RifleGoodLocation.SetActive(true);
+                
+
+                if(currentWeapon.GetComponent<PRifleBehaviour>().weapon == "Gravity"){
+                    currentWeapon.SetActive(false);
+                    RifleGoodLocation.SetActive(true);
+                }
+                if(currentWeapon.GetComponent<PRifleBehaviour>().weapon == "Parabolic"){
+                    currentWeapon.SetActive(false);
+                    ParabolicRifle.SetActive(true);
+                }
+                
 
                 //currentWeapon.transform.SetParent(player.GetComponent<CharacterControl>().WeaponLocation.transform);
                 player.GetComponent<CharacterControl>().CurrentWeapon = currentWeapon.gameObject;
                 player.GetComponent<CharacterControl>().changeState("Rifle");
+                haveWeapon = true;
                 
             }
 
             
         }
-        if (Input.GetKey(KeyCode.Q) && player.GetComponent<CharacterControl>().CurrentWeapon != null) // if you have an item and get the key to remove the object, again can be any key
-        {   currentWeapon.SetActive(true);
-            RifleGoodLocation.SetActive(false); 
-            currentWeapon.GetComponent<Rigidbody>().isKinematic = false; // make the rigidbody work again
-             currentWeapon.transform.parent = null; // make the object no be a child of the hands
+        if (Input.GetKey(KeyCode.Q) && player.GetComponent<CharacterControl>().CurrentWeapon != null && haveWeapon == true) 
+        {   
+
+            if(currentWeapon.GetComponent<PRifleBehaviour>().weapon == "Gravity"){
+                    currentWeapon.SetActive(true);
+                    RifleGoodLocation.SetActive(false); 
+                }
+            if(currentWeapon.GetComponent<PRifleBehaviour>().weapon == "Parabolic"){
+                    currentWeapon.SetActive(true);
+                    ParabolicRifle.SetActive(false); 
+                }
+                
+            currentWeapon.GetComponent<Rigidbody>().isKinematic = false;
+            currentWeapon.GetComponent<Rigidbody>().velocity = this.transform.forward * 10.0f; 
+             currentWeapon.transform.parent = null; 
              player.GetComponent<CharacterControl>().CurrentWeapon = null;
             player.GetComponent<CharacterControl>().changeState("None");
+            haveWeapon = false;
             
             
         }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Rifle
   - Rings
+  - Element
   layers:
   - Default
   - TransparentFX

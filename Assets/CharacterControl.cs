@@ -35,6 +35,10 @@ public class CharacterControl : MonoBehaviour
 
     public GameObject WeaponLocation;
 
+    public GameObject[] handWeapon;
+
+    public bool checkShoot;
+
 
 
     public bool CanMove;
@@ -51,7 +55,10 @@ public class CharacterControl : MonoBehaviour
 
          wizzardIdle,
          wizzardWalk,
-         wizzardBWalk,    
+         wizzardBWalk, 
+         dance1,
+         dance2,
+         dance3     
      }
      
      public CharacterState _state;
@@ -66,6 +73,7 @@ public class CharacterControl : MonoBehaviour
         sensitivityHorizontal = 100.0f;
         sensitivityVertical = 100.0f;
         speedWalk = 10.0f;
+        checkShoot = true;
     }
 
     public void changeState(string state){
@@ -193,8 +201,34 @@ public class CharacterControl : MonoBehaviour
                     break; 
             case CharacterState.wizzardBWalk:
                     this.animator.Play("Base Layer.wizzardBWalk");
+                    break; 
+
+            case CharacterState.dance1:
+                    this.animator.Play("Base Layer.Dance1");
+                    break; 
+            case CharacterState.dance2:
+                    this.animator.Play("Base Layer.Dance2");
+                    break; 
+            case CharacterState.dance3:
+                    this.animator.Play("Base Layer.Dance3");
                     break;  
          }            
+     }
+     void CheckShoot(){
+
+          if(Input.GetKey(KeyCode.Mouse0) && this.CurrentWeapon != null && this.CurrentWeapon.GetComponent<PRifleBehaviour>().weapon == "Parabolic" && checkShoot == true ){
+              checkShoot = false;
+              this.handWeapon[1].gameObject.GetComponent<PRifleBehaviour>().shoot();
+            
+              
+              
+          }
+          if(Input.GetKey(KeyCode.Mouse0) && this.CurrentWeapon != null && this.CurrentWeapon.GetComponent<PRifleBehaviour>().weapon == "Gravity" && checkShoot == true){
+              checkShoot = false;
+              this.handWeapon[0].gameObject.GetComponent<PRifleBehaviour>().shoot();              
+              
+          }
+         
      }
 
     // Update is called once per frame
@@ -226,16 +260,18 @@ public class CharacterControl : MonoBehaviour
              
             }
             CheckKey();
-            
-            
 
-            
-            
+            CheckShoot();  
 
-            
-            
-        
-        
+            if(Input.GetKey(KeyCode.Alpha1) && this.CurrentWeapon == null){
+                _state = CharacterState.dance1;
+            }
+            if(Input.GetKey(KeyCode.Alpha2) && this.CurrentWeapon == null){
+                _state = CharacterState.dance2;
+            }
+            if(Input.GetKey(KeyCode.Alpha3) && this.CurrentWeapon == null){
+                _state = CharacterState.dance3;
+            }
 
                     
         }
