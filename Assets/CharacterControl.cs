@@ -55,7 +55,8 @@ public class CharacterControl : MonoBehaviour
 
          wizzardIdle,
          wizzardWalk,
-         wizzardBWalk, 
+         wizzardBWalk,
+         wizzardShoot, 
          dance1,
          dance2,
          dance3     
@@ -208,6 +209,9 @@ public class CharacterControl : MonoBehaviour
             case CharacterState.wizzardBWalk:
                     this.animator.Play("Base Layer.wizzardBWalk");
                     break; 
+            case CharacterState.wizzardShoot:
+                    this.animator.Play("Base Layer.ShootW");
+                    break; 
 
             case CharacterState.dance1:
                     this.animator.Play("Base Layer.Dance1");
@@ -237,11 +241,25 @@ public class CharacterControl : MonoBehaviour
 
           if(Input.GetKey(KeyCode.Mouse0) && this.CurrentWeapon != null && this.CurrentWeapon.GetComponent<PRifleBehaviour>().weapon == "Spell" && checkShoot == true){
               checkShoot = false;
-              this.handWeapon[2].gameObject.GetComponent<PRifleBehaviour>().shoot();              
+              _state = CharacterState.wizzardShoot;
+              this.GetComponent<Animator>().speed = 5;
+              StartCoroutine(WaitShootAnimation()); 
+              print("shoot");
+              
+              
+                           
               
           }
          
      }
+
+     public IEnumerator WaitShootAnimation(){
+        yield return new WaitForSeconds(0.3f);
+        
+        this.handWeapon[2].gameObject.GetComponent<PRifleBehaviour>().shoot();
+        _state = CharacterState.wizzardIdle;
+        this.GetComponent<Animator>().speed = 1;
+    }
 
     // Update is called once per frame
     void Update()

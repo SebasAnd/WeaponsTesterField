@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 813646df30fb3424b9b50faf9de14a47, type: 3}
   m_Name: Anillos de Poder
   m_EditorClassIdentifier: 
-  velocidad_de_disparo: 40
+  velocidad_de_disparo: 30
   tiempo_de_duracion_del_projectil: 0.5
   fuerza_de_empuje: 10

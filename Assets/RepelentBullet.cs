@@ -25,7 +25,7 @@ public class RepelentBullet : MonoBehaviour
              
             if(collider.gameObject.tag == "Element"){
                 
-                print(collider.gameObject.tag);
+                
                 Vector3 forceDirection = collider.gameObject.transform.up + this.transform.forward;
                 //collider.GetComponent<Rigidbody>().AddForce(forceDirection * 2000.0f);
                 //his.GetComponent<SphereCollider>().radius = 50;
