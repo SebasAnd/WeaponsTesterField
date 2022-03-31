@@ -19,20 +19,36 @@ public class PRifleBehaviour : MonoBehaviour
 
     /* Controlled Stats*/
 
-    public int maxProjectiles;
     public float ShootSpeed;
 
     public float DurationProjectile;
 
     GameObject player;
 
+    public ParabolicWeapon InitialvaluesParabolicWeapon;
+
+    public GravityWeapon InitialvaluesGravityWeapon;
+
+    public SpellWeapon InitialvaluesSpellWeapon;
+
     // Start is called before the first frame update
     void Start()
     {
+
+        if(weapon == "Parabolic"){
+            ShootSpeed = InitialvaluesParabolicWeapon.velocidad_de_disparo;
+            DurationProjectile = InitialvaluesParabolicWeapon.tiempo_de_duracion_del_projectil;
+        }
+
+        if(weapon == "Gravity"){
+            ShootSpeed = InitialvaluesGravityWeapon.velocidad_de_disparo;
+            DurationProjectile = InitialvaluesGravityWeapon.tiempo_de_duracion_del_projectil;
+        } 
+        if(weapon == "Spell"){
+            ShootSpeed = InitialvaluesSpellWeapon.velocidad_de_disparo;
+            DurationProjectile = InitialvaluesSpellWeapon.tiempo_de_duracion_del_projectil;
+        }          
         
-        maxProjectiles = 5;
-        ShootSpeed = 20.0f;
-        DurationProjectile = 3.0f;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -74,10 +90,23 @@ public class PRifleBehaviour : MonoBehaviour
         
         StartCoroutine(CooldownBehaviour());
 
-        //yield on a new YieldInstruction that waits for 5 seconds.
         yield return new WaitForSeconds(DurationProjectile);
 
-        //After we have waited 5 seconds print the time again.
+        Destroy(projectile);
+    }
+    public IEnumerator CastSpell()
+    {
+        GameObject projectile = Instantiate(ammoPrefab);
+        projectile.transform.SetParent(projectilesUsed.transform);
+        projectile.transform.position = this.PositionShoot.transform.position;
+        projectile.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * ShootSpeed;
+
+        
+        StartCoroutine(CooldownBehaviour());
+        
+
+        
+        yield return new WaitForSeconds(DurationProjectile);
         Destroy(projectile);
     }
 
@@ -88,6 +117,9 @@ public class PRifleBehaviour : MonoBehaviour
         }
         if(weapon == "Parabolic"){
             StartCoroutine(ParabolicBehaviour());
+        }
+        if(weapon == "Spell"){
+            StartCoroutine(CastSpell());
         }
         
     }

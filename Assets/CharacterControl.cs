@@ -64,10 +64,12 @@ public class CharacterControl : MonoBehaviour
      public CharacterState _state;
      public string idleAnimName;
      public string walkAnimName;
+
     
     // Start is called before the first frame update
     void Start()
     {
+
         CanMove = false;
         this.animator = GetComponent<Animator>();
         sensitivityHorizontal = 100.0f;
@@ -87,6 +89,10 @@ public class CharacterControl : MonoBehaviour
                 this._state = CharacterState.idle;            
                 this.animator.Play("Base Layer.Idle");
                 break;
+            case "Spell":
+                this._state = CharacterState.wizzardIdle;            
+                this.animator.Play("Base Layer.wizzardIdle");
+                break;
          }
         
     }
@@ -105,19 +111,19 @@ public class CharacterControl : MonoBehaviour
 
         if(parameter == 1)
         {
-            this.animator.Play("Base Layer.Dance1",0,0.25f);
+            this.animator.Play("Base Layer.Dance1",0,0f);
         }
         if(parameter == 2)
         {
-            this.animator.Play("Base Layer.Dance2",0,0.25f);
+            this.animator.Play("Base Layer.Dance2",0,0f);
         }
         if(parameter == 3)
         {
-            this.animator.Play("Base Layer.Dance3",0,0.25f);
+            this.animator.Play("Base Layer.Dance3",0,0f);
         }
         if(parameter == 0)
         {
-            this.animator.Play("Base Layer.Idle",0,0.25f);
+            this.animator.Play("Base Layer.Idle",0,0f);
         }
     }
 
@@ -228,6 +234,12 @@ public class CharacterControl : MonoBehaviour
               this.handWeapon[0].gameObject.GetComponent<PRifleBehaviour>().shoot();              
               
           }
+
+          if(Input.GetKey(KeyCode.Mouse0) && this.CurrentWeapon != null && this.CurrentWeapon.GetComponent<PRifleBehaviour>().weapon == "Spell" && checkShoot == true){
+              checkShoot = false;
+              this.handWeapon[2].gameObject.GetComponent<PRifleBehaviour>().shoot();              
+              
+          }
          
      }
 
@@ -259,6 +271,7 @@ public class CharacterControl : MonoBehaviour
                     this.transform.Translate(-1 * Vector3.forward * Time.deltaTime * this.speedWalk);
              
             }
+            
             CheckKey();
 
             CheckShoot();  
@@ -275,6 +288,11 @@ public class CharacterControl : MonoBehaviour
 
                     
         }
+
+        if(Input.GetKey(KeyCode.Escape)){
+                print("Key pressed");
+                Application.Quit();
+            }
          
         
     }

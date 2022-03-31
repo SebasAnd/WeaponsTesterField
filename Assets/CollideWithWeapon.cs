@@ -11,8 +11,11 @@ public class CollideWithWeapon : MonoBehaviour
 
     public GameObject RifleGoodLocation;
     public GameObject ParabolicRifle;
+    public GameObject Rings;
 
     public bool haveWeapon;
+
+    public GameObject crossAir;
 
 
     bool canPickup;
@@ -35,6 +38,14 @@ public class CollideWithWeapon : MonoBehaviour
             other.GetComponent<PRifleBehaviour>().collideIndicator.gameObject.SetActive(true);
 
         }
+        if(other.tag == "Rings" && haveWeapon == false){
+
+            canPickup = true; 
+            currentWeapon = other.gameObject;
+            
+            other.GetComponent<PRifleBehaviour>().collideIndicator.gameObject.SetActive(true);
+
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -43,7 +54,12 @@ public class CollideWithWeapon : MonoBehaviour
         if(other.tag == "Rifle" ){
             other.GetComponent<PRifleBehaviour>().collideIndicator.gameObject.SetActive(false);
 
+        }
+        if(other.tag == "Rings" ){
+            other.GetComponent<PRifleBehaviour>().collideIndicator.gameObject.SetActive(false);
+
         }        
+             
      
     }
 
@@ -66,16 +82,29 @@ public class CollideWithWeapon : MonoBehaviour
                 if(currentWeapon.GetComponent<PRifleBehaviour>().weapon == "Gravity"){
                     currentWeapon.SetActive(false);
                     RifleGoodLocation.SetActive(true);
+                    Rings.SetActive(false);
+                    crossAir.SetActive(true);
+                    player.GetComponent<CharacterControl>().changeState("Rifle");
                 }
                 if(currentWeapon.GetComponent<PRifleBehaviour>().weapon == "Parabolic"){
                     currentWeapon.SetActive(false);
                     ParabolicRifle.SetActive(true);
+                    Rings.SetActive(false);
+                    crossAir.SetActive(true);
+                    player.GetComponent<CharacterControl>().changeState("Rifle");
+                }
+                if(currentWeapon.GetComponent<PRifleBehaviour>().weapon == "Spell"){
+                    currentWeapon.SetActive(false);
+                    ParabolicRifle.SetActive(false);
+                    Rings.SetActive(true);
+                    crossAir.SetActive(true);
+                    player.GetComponent<CharacterControl>().changeState("Spell");
                 }
                 
 
                 //currentWeapon.transform.SetParent(player.GetComponent<CharacterControl>().WeaponLocation.transform);
                 player.GetComponent<CharacterControl>().CurrentWeapon = currentWeapon.gameObject;
-                player.GetComponent<CharacterControl>().changeState("Rifle");
+                
                 haveWeapon = true;
                 
             }
@@ -87,11 +116,19 @@ public class CollideWithWeapon : MonoBehaviour
 
             if(currentWeapon.GetComponent<PRifleBehaviour>().weapon == "Gravity"){
                     currentWeapon.SetActive(true);
-                    RifleGoodLocation.SetActive(false); 
+                    RifleGoodLocation.SetActive(false);
+                    crossAir.SetActive(false); 
                 }
             if(currentWeapon.GetComponent<PRifleBehaviour>().weapon == "Parabolic"){
                     currentWeapon.SetActive(true);
-                    ParabolicRifle.SetActive(false); 
+                    ParabolicRifle.SetActive(false);
+                    crossAir.SetActive(false); 
+                }
+                if(currentWeapon.GetComponent<PRifleBehaviour>().weapon == "Spell"){
+                    currentWeapon.SetActive(true);
+                    ParabolicRifle.SetActive(false);
+                    Rings.SetActive(false);
+                    crossAir.SetActive(false);
                 }
                 
             currentWeapon.GetComponent<Rigidbody>().isKinematic = false;

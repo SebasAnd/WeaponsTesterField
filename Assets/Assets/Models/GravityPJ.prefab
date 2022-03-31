@@ -4892,7 +4892,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 424618273867989842}
-  attract: 1
+  gravityForce: 0
+  InitialValuesGravityWeapon: {fileID: 11400000, guid: 180037aaabec51e4f87b02ce91853b71, type: 2}
 --- !u!54 &424618275225257059
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -6,12 +6,16 @@ public class GravityBullet : MonoBehaviour
 {
     public GameObject target;
 
-    public bool attract;
+    public float gravityForce;
+
+    public GravityWeapon InitialValuesGravityWeapon;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        attract = true;
+       
+        gravityForce = InitialValuesGravityWeapon.fuerza_de_gravedad;
        
     }
 
@@ -25,13 +29,12 @@ public class GravityBullet : MonoBehaviour
              // calculate direction from target to me
              
             if(collider.gameObject.tag == "Element"){
-                print(collider.gameObject.tag);
-                Vector3 forceDirection = this.target.transform.position- collider.transform.position;
-                //collider.GetComponent<Rigidbody>().AddForce(forceDirection * 2000.0f);
-                collider.transform.Translate(forceDirection * 2.0f * Time.deltaTime);
+                
+                Vector3 forceDirection = this.target.transform.position - collider.transform.position;
+                collider.GetComponent<Rigidbody>().velocity = forceDirection * gravityForce;
+                //collider.transform.Translate(this.target.transform.position * gravityForce * Time.deltaTime);
                 
             }
-             // apply force on target towards me
              
          }
 
