@@ -69,13 +69,13 @@ public class PRifleBehaviour : MonoBehaviour
 
         
         StartCoroutine(CooldownBehaviour());
-        
+        Destroy(projectile,DurationProjectile);
 
         //yield on a new YieldInstruction that waits for 5 seconds.
         yield return new WaitForSeconds(DurationProjectile);
 
         //After we have waited 5 seconds print the time again.
-        Destroy(projectile);
+        
     }
 
     public IEnumerator GravityBehaviour()
@@ -89,10 +89,11 @@ public class PRifleBehaviour : MonoBehaviour
 
         
         StartCoroutine(CooldownBehaviour());
+        Destroy(projectile,DurationProjectile);
 
         yield return new WaitForSeconds(DurationProjectile);
 
-        Destroy(projectile);
+        
     }
     public IEnumerator CastSpell()
     {
@@ -103,11 +104,11 @@ public class PRifleBehaviour : MonoBehaviour
 
         
         StartCoroutine(CooldownBehaviour());
-        
+        Destroy(projectile,DurationProjectile);        
 
         
         yield return new WaitForSeconds(DurationProjectile);
-        Destroy(projectile);
+        
     }
 
     public void shoot(){

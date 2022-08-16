@@ -43,17 +43,25 @@ public class CharacterControl : MonoBehaviour
 
     public bool CanMove;
 
+
     public enum CharacterState 
      {
          idle,
          walking,
+         walkLeft,
+         walkRight,
          bWalk,
 
          gunIdle,
+         gunWalkLeft,
+         gunWalkRight,
          gunWalk,
          gunBWalk,
 
+
          wizzardIdle,
+         wizzardWalkLeft,
+         wizzardWalkRight,
          wizzardWalk,
          wizzardBWalk,
          wizzardShoot, 
@@ -85,14 +93,17 @@ public class CharacterControl : MonoBehaviour
             case "Rifle":
                 this._state = CharacterState.gunIdle;            
                 this.animator.Play("Base Layer.gunIdle");
+                checkShoot = true;
                 break;
             case "None":
                 this._state = CharacterState.idle;            
                 this.animator.Play("Base Layer.Idle");
+                checkShoot = true;
                 break;
             case "Spell":
                 this._state = CharacterState.wizzardIdle;            
                 this.animator.Play("Base Layer.wizzardIdle");
+                checkShoot = true;
                 break;
          }
         
@@ -132,17 +143,51 @@ public class CharacterControl : MonoBehaviour
      {
          if(Input.GetKeyDown(KeyCode.W) && CurrentWeapon == null ) {
              _state = CharacterState.walking;
-         } else if (Input.GetKeyUp(KeyCode.W) && CurrentWeapon == null) {
-             _state = CharacterState.idle;
-         }else{
-             if(Input.GetKeyDown(KeyCode.S) && CurrentWeapon == null ) {
-             _state = CharacterState.bWalk;
-         } else if ( Input.GetKeyUp(KeyCode.S) && CurrentWeapon == null ) {
-             _state = CharacterState.idle;
-         }
-         }
+             
+         } 
+        if(Input.GetKeyDown(KeyCode.S) && CurrentWeapon == null)  {
+            _state = CharacterState.bWalk;
 
-         if(Input.GetKeyDown(KeyCode.W) && CurrentWeapon != null && CurrentWeapon.tag =="Rifle") {
+        }
+        if(Input.GetKeyDown(KeyCode.A) && CurrentWeapon == null)  {
+            _state = CharacterState.walkLeft;
+
+        }
+        if(Input.GetKeyDown(KeyCode.D) && CurrentWeapon == null)  {
+            _state = CharacterState.walkRight;
+
+        }
+        if(CurrentWeapon == null &&  !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) &&  !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)
+            && _state != CharacterState.dance1 && _state != CharacterState.dance2 && _state != CharacterState.dance3){
+            _state = CharacterState.idle;
+            
+        }
+
+
+        if(Input.GetKeyDown(KeyCode.W)&& CurrentWeapon != null && CurrentWeapon.tag == "Rifle" ) {
+             _state = CharacterState.gunBWalk;
+             
+         } 
+        if(Input.GetKeyDown(KeyCode.S)&& CurrentWeapon != null && CurrentWeapon.tag == "Rifle" )  {
+            _state = CharacterState.gunBWalk;
+
+        }
+        if(Input.GetKeyDown(KeyCode.A)&& CurrentWeapon != null && CurrentWeapon.tag == "Rifle" )  {
+            _state = CharacterState.gunWalkLeft;
+
+        }
+        if(Input.GetKeyDown(KeyCode.D)&& CurrentWeapon != null && CurrentWeapon.tag == "Rifle")  {
+            _state = CharacterState.gunWalkRight;
+
+        }
+        if(CurrentWeapon != null && CurrentWeapon.tag == "Rifle" &&  !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D)&&  !Input.GetKey(KeyCode.A)){
+            _state = CharacterState.gunIdle;
+            
+        }
+             
+          
+
+         /*if(Input.GetKeyDown(KeyCode.W) && CurrentWeapon != null && CurrentWeapon.tag =="Rifle") {
              _state = CharacterState.gunWalk;
          } else if (Input.GetKeyUp(KeyCode.W) && CurrentWeapon != null && CurrentWeapon.tag =="Rifle") {
              _state = CharacterState.gunIdle;
@@ -152,8 +197,30 @@ public class CharacterControl : MonoBehaviour
          } else if ( Input.GetKeyUp(KeyCode.S) && CurrentWeapon != null && CurrentWeapon.tag =="Rifle") {
              _state = CharacterState.gunIdle;
          }
-         }
+         }*/
 
+
+         if(Input.GetKeyDown(KeyCode.W)&& CurrentWeapon != null && CurrentWeapon.tag == "Rings" ) {
+             _state = CharacterState.wizzardWalk;
+             
+         } 
+        if(Input.GetKeyDown(KeyCode.S)&& CurrentWeapon != null && CurrentWeapon.tag == "Rings" )  {
+            _state = CharacterState.wizzardBWalk;
+
+        }
+        if(Input.GetKeyDown(KeyCode.A)&& CurrentWeapon != null && CurrentWeapon.tag == "Rings" )  {
+            _state = CharacterState.wizzardWalkLeft;
+
+        }
+        if(Input.GetKeyDown(KeyCode.D)&& CurrentWeapon != null && CurrentWeapon.tag == "Rings")  {
+            _state = CharacterState.wizzardWalkRight;
+
+        }
+        if(CurrentWeapon != null && CurrentWeapon.tag == "Rings" && _state != CharacterState.wizzardShoot &&  !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) &&  !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)){
+            _state = CharacterState.wizzardIdle;
+            
+        }
+/*
          if(Input.GetKeyDown(KeyCode.W) && CurrentWeapon != null && CurrentWeapon.tag =="Rings") {
              _state = CharacterState.wizzardWalk;
          } else if (Input.GetKeyUp(KeyCode.W) && CurrentWeapon != null && CurrentWeapon.tag =="Rings") {
@@ -166,7 +233,7 @@ public class CharacterControl : MonoBehaviour
          }
          }
 
-         
+         */
         
          PlayAnimation();
      }
@@ -187,8 +254,13 @@ public class CharacterControl : MonoBehaviour
          
             case CharacterState.walking:
                     this.animator.Play("Base Layer.Walk");
-                    break;  
-
+                    break;
+            case CharacterState.walkLeft:
+                    this.animator.Play("Base Layer.WalkLeft");
+                    break; 
+            case CharacterState.walkRight:
+                    this.animator.Play("Base Layer.WalkRight");
+                    break; 
             case CharacterState.gunIdle:
                     this.animator.Play("Base Layer.gunIdle");
                     break;  
@@ -198,6 +270,12 @@ public class CharacterControl : MonoBehaviour
                     break; 
             case CharacterState.gunBWalk:
                     this.animator.Play("Base Layer.gunBWalk");
+                    break;
+            case CharacterState.gunWalkLeft:
+                    this.animator.Play("Base Layer.gunWalkLeft");
+                    break;
+            case CharacterState.gunWalkRight:
+                    this.animator.Play("Base Layer.gunWalkRight");
                     break;    
             case CharacterState.wizzardIdle:
                     this.animator.Play("Base Layer.wizzardIdle");
@@ -209,6 +287,12 @@ public class CharacterControl : MonoBehaviour
             case CharacterState.wizzardBWalk:
                     this.animator.Play("Base Layer.wizzardBWalk");
                     break; 
+            case CharacterState.wizzardWalkLeft:
+                    this.animator.Play("Base Layer.wizzardLeftWalk");
+                    break;
+            case CharacterState.wizzardWalkRight:
+                    this.animator.Play("Base Layer.wizzardRightWalk");
+                    break;
             case CharacterState.wizzardShoot:
                     this.animator.Play("Base Layer.ShootW");
                     break; 
@@ -226,23 +310,24 @@ public class CharacterControl : MonoBehaviour
      }
      void CheckShoot(){
 
-          if(Input.GetKey(KeyCode.Mouse0) && this.CurrentWeapon != null && this.CurrentWeapon.GetComponent<PRifleBehaviour>().weapon == "Parabolic" && checkShoot == true ){
+          if(Input.GetKeyDown(KeyCode.Mouse0) && this.CurrentWeapon != null && this.CurrentWeapon.GetComponent<PRifleBehaviour>().weapon == "Parabolic" && checkShoot == true ){
               checkShoot = false;
               this.handWeapon[1].gameObject.GetComponent<PRifleBehaviour>().shoot();
             
               
               
           }
-          if(Input.GetKey(KeyCode.Mouse0) && this.CurrentWeapon != null && this.CurrentWeapon.GetComponent<PRifleBehaviour>().weapon == "Gravity" && checkShoot == true){
+          if(Input.GetKeyDown(KeyCode.Mouse0) && this.CurrentWeapon != null && this.CurrentWeapon.GetComponent<PRifleBehaviour>().weapon == "Gravity" && checkShoot == true){
               checkShoot = false;
               this.handWeapon[0].gameObject.GetComponent<PRifleBehaviour>().shoot();              
               
           }
 
-          if(Input.GetKey(KeyCode.Mouse0) && this.CurrentWeapon != null && this.CurrentWeapon.GetComponent<PRifleBehaviour>().weapon == "Spell" && checkShoot == true){
+          if(Input.GetKeyDown(KeyCode.Mouse0) && this.CurrentWeapon != null && this.CurrentWeapon.GetComponent<PRifleBehaviour>().weapon == "Spell" && checkShoot == true){
               checkShoot = false;
               _state = CharacterState.wizzardShoot;
               this.GetComponent<Animator>().speed = 5;
+              
               StartCoroutine(WaitShootAnimation()); 
               print("shoot");
               
@@ -259,6 +344,7 @@ public class CharacterControl : MonoBehaviour
         this.handWeapon[2].gameObject.GetComponent<PRifleBehaviour>().shoot();
         _state = CharacterState.wizzardIdle;
         this.GetComponent<Animator>().speed = 1;
+        
     }
 
     // Update is called once per frame
@@ -289,12 +375,21 @@ public class CharacterControl : MonoBehaviour
                     this.transform.Translate(-1 * Vector3.forward * Time.deltaTime * this.speedWalk);
              
             }
+            if (Input.GetKey(KeyCode.A)){ 
+                    this.transform.Translate(-1 * Vector3.right * Time.deltaTime * this.speedWalk);
+             
+            }
+            if (Input.GetKey(KeyCode.D)){ 
+                    this.transform.Translate(Vector3.right * Time.deltaTime * this.speedWalk);
+             
+            }
             
             CheckKey();
 
             CheckShoot();  
 
             if(Input.GetKey(KeyCode.Alpha1) && this.CurrentWeapon == null){
+                print("KKKKKKKKKKKKKKKKKKKKKKKK");
                 _state = CharacterState.dance1;
             }
             if(Input.GetKey(KeyCode.Alpha2) && this.CurrentWeapon == null){
@@ -302,6 +397,9 @@ public class CharacterControl : MonoBehaviour
             }
             if(Input.GetKey(KeyCode.Alpha3) && this.CurrentWeapon == null){
                 _state = CharacterState.dance3;
+            }
+            if(Input.GetKey(KeyCode.Alpha4) && this.CurrentWeapon == null){
+                _state = CharacterState.idle;
             }
 
                     

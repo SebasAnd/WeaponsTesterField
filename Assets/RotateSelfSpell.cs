@@ -15,6 +15,6 @@ public class RotateSelfSpell : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.Rotate (new Vector3(0,0,1) * speedRotation * Time.deltaTime, Space.World);        
+        this.transform.Rotate (new Vector3(0,0,0) * speedRotation * Time.deltaTime, Space.World);        
     }
 }

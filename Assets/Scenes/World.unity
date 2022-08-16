@@ -6254,43 +6254,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 460057689753198966, guid: 46d9ccf795ad6244ab425c5971ac31a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.022
+      value: -0.054
       objectReference: {fileID: 0}
     - target: {fileID: 460057689753198966, guid: 46d9ccf795ad6244ab425c5971ac31a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.135
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 460057689753198966, guid: 46d9ccf795ad6244ab425c5971ac31a4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.166
+      value: -0.133
       objectReference: {fileID: 0}
     - target: {fileID: 460057689753198966, guid: 46d9ccf795ad6244ab425c5971ac31a4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.1125678
+      value: -0.16519511
       objectReference: {fileID: 0}
     - target: {fileID: 460057689753198966, guid: 46d9ccf795ad6244ab425c5971ac31a4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.2582256
+      value: -0.3343981
       objectReference: {fileID: 0}
     - target: {fileID: 460057689753198966, guid: 46d9ccf795ad6244ab425c5971ac31a4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.92714024
+      value: -0.92784035
       objectReference: {fileID: 0}
     - target: {fileID: 460057689753198966, guid: 46d9ccf795ad6244ab425c5971ac31a4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.24710108
+      value: -0.00093358755
       objectReference: {fileID: 0}
     - target: {fileID: 460057689753198966, guid: 46d9ccf795ad6244ab425c5971ac31a4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -31.086
+      value: 6.243
       objectReference: {fileID: 0}
     - target: {fileID: 460057689753198966, guid: 46d9ccf795ad6244ab425c5971ac31a4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -174.565
+      value: -197.999
       objectReference: {fileID: 0}
     - target: {fileID: 460057689753198966, guid: 46d9ccf795ad6244ab425c5971ac31a4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 29.614
+      value: 38.649
       objectReference: {fileID: 0}
     - target: {fileID: 948470223493495756, guid: 46d9ccf795ad6244ab425c5971ac31a4, type: 3}
       propertyPath: m_Name
@@ -6685,43 +6685,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1187291080577907332, guid: 675bcb2b230d8d048846c99de111d477, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.005
+      value: -0.192
       objectReference: {fileID: 0}
     - target: {fileID: 1187291080577907332, guid: 675bcb2b230d8d048846c99de111d477, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.25
+      value: 0.011
       objectReference: {fileID: 0}
     - target: {fileID: 1187291080577907332, guid: 675bcb2b230d8d048846c99de111d477, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.072
+      value: 0.141
       objectReference: {fileID: 0}
     - target: {fileID: 1187291080577907332, guid: 675bcb2b230d8d048846c99de111d477, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.74075115
+      value: 0.4868962
       objectReference: {fileID: 0}
     - target: {fileID: 1187291080577907332, guid: 675bcb2b230d8d048846c99de111d477, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0026780062
+      value: -0.30266154
       objectReference: {fileID: 0}
     - target: {fileID: 1187291080577907332, guid: 675bcb2b230d8d048846c99de111d477, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.56193674
+      value: -0.7304706
       objectReference: {fileID: 0}
     - target: {fileID: 1187291080577907332, guid: 675bcb2b230d8d048846c99de111d477, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.36811373
+      value: -0.37113443
       objectReference: {fileID: 0}
     - target: {fileID: 1187291080577907332, guid: 675bcb2b230d8d048846c99de111d477, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -24.189
+      value: -56.818
       objectReference: {fileID: 0}
     - target: {fileID: 1187291080577907332, guid: 675bcb2b230d8d048846c99de111d477, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -66.178
+      value: -117.225
       objectReference: {fileID: 0}
     - target: {fileID: 1187291080577907332, guid: 675bcb2b230d8d048846c99de111d477, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -36.952
+      value: 8.486
       objectReference: {fileID: 0}
     - target: {fileID: 1725058492336130787, guid: 675bcb2b230d8d048846c99de111d477, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7329,6 +7329,34 @@ PrefabInstance:
       propertyPath: InitialvaluesParabolicWeapon
       value: 
       objectReference: {fileID: 11400000, guid: 51fd0a04faf0f644d98037ed5d94203d, type: 2}
+    - target: {fileID: 6826172907338249698, guid: 17f3798901452144eac7a5984afa0d34, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.6830127
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826172907338249698, guid: 17f3798901452144eac7a5984afa0d34, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.6830127
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826172907338249698, guid: 17f3798901452144eac7a5984afa0d34, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.18301274
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826172907338249698, guid: 17f3798901452144eac7a5984afa0d34, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.18301274
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826172907338249698, guid: 17f3798901452144eac7a5984afa0d34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826172907338249698, guid: 17f3798901452144eac7a5984afa0d34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826172907338249698, guid: 17f3798901452144eac7a5984afa0d34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -150
+      objectReference: {fileID: 0}
     - target: {fileID: 6826172907338249701, guid: 17f3798901452144eac7a5984afa0d34, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -7946,7 +7974,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875221206}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 148710488}
@@ -7954,8 +7982,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 220, y: -196}
-  m_SizeDelta: {x: 405.14563, y: 366.8036}
+  m_AnchoredPosition: {x: 234.0059, y: -251.3}
+  m_SizeDelta: {x: 433.1575, y: 477.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &875221208
 MonoBehaviour:
@@ -7990,11 +8018,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Movimiento: \nW : Desplaza el personaje hacia adelante\nS: Desplaza el
-    personaje hacia atr\xE1s\nMouse: rota el personaje\n\nArmas:\nClick izquierdo:
-    Dispara\nE: Recoge el arma si el personaje esta cerca(Brillo en el arma)\nQ:
-    Arroja el arma que esta usando en el momento\n\nBaile: \n1: Realiza el baile
-    1\n2: Realiza el baile 2\n3: Realiza el baile 3\n\nEscape: Cierra el juego"
+  m_Text: "Movimiento: \nW : Desplaza el personaje hacia adelante\nA: Desplaza el
+    personaje hacia la izquierda\nS: Desplaza el personaje hacia atr\xE1s\nD: Desplaza
+    el personaje hacia la derecha\nMouse: rota el personaje\n\n\nArmas:\nClick izquierdo:
+    Dispara\nE: Recoge el arma si el personaje esta cerca(el arma brilla cuando se
+    puede agarrar)\nQ: Arroja el arma que esta usando en el momento\n\nBaile: \n1:
+    Realiza el baile 1\n2: Realiza el baile 2\n3: Realiza el baile 3\n4: Deja de
+    hacer el baile\n\nEscape: Cierra el juego"
 --- !u!222 &875221209
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -111,7 +111,7 @@ public class CollideWithWeapon : MonoBehaviour
 
             
         }
-        if (Input.GetKey(KeyCode.Q) && player.GetComponent<CharacterControl>().CurrentWeapon != null && haveWeapon == true) 
+        if (Input.GetKey(KeyCode.Q) && player.GetComponent<CharacterControl>().CurrentWeapon != null && haveWeapon == true && player.GetComponent<CharacterControl>().checkShoot) 
         {   
 
             if(currentWeapon.GetComponent<PRifleBehaviour>().weapon == "Gravity"){

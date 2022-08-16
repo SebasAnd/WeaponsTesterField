@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Rifle de Gravedad
   m_EditorClassIdentifier: 
   velocidad_de_disparo: 5
-  tiempo_de_duracion_del_projectil: 1
+  tiempo_de_duracion_del_projectil: 3
   fuerza_de_gravedad: 30
